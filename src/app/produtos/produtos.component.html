@@ -1,5 +1,5 @@
-<section class="product-list">
-    <div class="card" *ngFor="let produto of produtos">
+<section class="product-list row">
+    <div class="card col-md-6" *ngFor="let produto of produtos">
         <a class="product-list__link" routerLink="/produtos/{{produto.id}}">
             <img [src]="produto.imagem">
             <h2 class="card-header">{{ produto.descricao }}</h2>
