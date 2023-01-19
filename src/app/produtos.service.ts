@@ -15,6 +15,6 @@ export class ProdutosService {
   }
 
   getOne(IDproduto: number){
-    return this.produtos.find(produto => produto.id = IDproduto);
+    return this.produtos.find(produto => produto.id == IDproduto); 
   }
 }

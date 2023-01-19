@@ -1,12 +1,11 @@
 <section class="product-list row">
-    <div class="card col-md-6" *ngFor="let produto of produtos">
+    <div class="card col-md-3" *ngFor="let produto of produtos">
         <a class="product-list__link" routerLink="/produtos/{{produto.id}}">
+            <p class="product-name">{{ produto.descricao }}</p>
             <img [src]="produto.imagem">
-            <h2 class="card-header">{{ produto.descricao }}</h2>
             <p class="product-item__price">{{ produto.preco | currency: "BRL" }}</p>
             <p class="product-item__price-description">{{ produto.descricaoPreco }}</p>
-            <button class="product-item__buy-button btn btn-primary" type="button">
-                <i class="fa-solid fa-cart-shopping"></i>
+            <button class="product-item__buy-button btn btn-success" type="button">
                 Comprar</button>
         </a>
     </div>
