@@ -5,13 +5,101 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form action="" class="row">
-                <input type="text" placeholder="Digite o seu nome" class="col-md-6 mb-2">
-                <input type="assunto" placeholder="Digite o assunto" class="mb-2">
-                <input type="tel" placeholder="(00) 0 0000-0000" class="mb-2">
-                <input type="email" placeholder="Digite o seu e-mail" class="mb-2">
-                <textarea maxlength="300" placeholder="Digite a mensagem..."></textarea>
-                <button type="button" class="btn btn-primary mt-2 col-md-3">Enviar</button>
+            <form action="" class="row" [formGroup]="formContato" (ngSubmit)="enviarMensagem()">
+                <input type="text" placeholder="Digite o seu nome" class="col-md-6 mb-2" formControlName="nome"
+                    [class.valid]="formContato.controls['nome'].valid"
+                    [class.invalid]="formContato.controls['nome'].invalid && (formContato.controls['nome'].touched || formContato.controls['nome'].dirty)">
+
+                <div *ngIf="formContato.controls['nome'].invalid &&
+                    (formContato.controls['nome'].touched || formContato.controls['nome'].dirty)">
+                    <small class="error-message" *ngIf="formContato.controls['nome'].hasError('minlength')">
+                        O campo nome precisa ter no mínimo 4 caracteres.
+                    </small>
+                    <small class="error-message" *ngIf="formContato.controls['nome'].hasError('required')">
+                        O campo nome é de preenchimento obrigatório.
+                    </small>
+
+                </div>
+
+                <input type="assunto" placeholder="Digite o assunto" class="mb-2" formControlName="assunto"
+                    [class.valid]="formContato.controls['assunto'].valid"
+                    [class.invalid]="formContato.controls['assunto'].invalid && (formContato.controls['assunto'].touched || formContato.controls['assunto'].dirty)">
+
+
+                <div *ngIf="formContato.controls['assunto'].invalid &&
+                    (formContato.controls['assunto'].touched || formContato.controls['assunto'].dirty)">
+                    <small class="error-message" *ngIf="formContato.controls['assunto'].hasError('minlength')">
+                        O campo assunto precisa ter no mínimo 10 caracteres.
+                    </small>
+                    <small class="error-message" *ngIf="formContato.controls['assunto'].hasError('required')">
+                        O campo assunto é de preenchimento obrigatório.
+                    </small>
+
+                </div>
+
+                <input 
+                type="tel" 
+                placeholder="(00) 0 0000-0000" 
+                class="mb-2" 
+                mask="(00) 0 0000-0000"
+                formControlName="telefone"
+                    [class.valid]="formContato.controls['telefone'].valid"
+                    [class.invalid]="formContato.controls['telefone'].invalid && (formContato.controls['telefone'].touched || formContato.controls['telefone'].dirty)"
+                >
+                <div *ngIf="formContato.controls['telefone'].invalid &&
+                (formContato.controls['telefone'].touched || formContato.controls['telefone'].dirty)">
+                <small class="error-message" *ngIf="formContato.controls['telefone'].hasError('minlength')">
+                    O campo telefone precisa ter no mínimo 11 caracteres.
+                </small>
+                <small class="error-message" *ngIf="formContato.controls['telefone'].hasError('required')">
+                    O campo telefone é de preenchimento obrigatório.
+                </small>
+
+            </div>
+                
+                <input 
+                type="email" 
+                placeholder="Digite o seu e-mail" 
+                class="mb-2"
+                formControlName="email"
+                    [class.valid]="formContato.controls['email'].valid"
+                    [class.invalid]="formContato.controls['email'].invalid && (formContato.controls['email'].touched || formContato.controls['email'].dirty)"
+                >
+                <div *ngIf="formContato.controls['email'].invalid &&
+                (formContato.controls['email'].touched || formContato.controls['email'].dirty)">
+                <small class="error-message" *ngIf="formContato.controls['email'].hasError('email')">
+                    O campo email precisa de um e-mail válido ex.: nome@gmail.com
+                </small>
+                <small class="error-message" *ngIf="formContato.controls['email'].hasError('required')">
+                    O campo email é de preenchimento obrigatório.
+                </small>
+
+            </div>
+
+                <textarea 
+                maxlength="300" 
+                placeholder="Digite a mensagem..."
+                formControlName="mensagem"
+                [(ngModel)]="mensagem"
+                [class.valid]="formContato.controls['mensagem'].valid"
+                [class.invalid]="formContato.controls['mensagem'].invalid && (formContato.controls['mensagem'].touched || formContato.controls['mensagem'].dirty)"
+                ></textarea>
+                <div *ngIf="formContato.controls['mensagem'].invalid &&
+                (formContato.controls['mensagem'].touched || formContato.controls['mensagem'].dirty)">
+                <small class="error-message" *ngIf="formContato.controls['mensagem'].hasError('minlength')">
+                    O campo mensagem precisa ter no mínimo 20 caracteres.
+                </small>
+                <small class="error-message" *ngIf="formContato.controls['mensagem'].hasError('required')">
+                    O campo mensagem é de preenchimento obrigatório.
+                </small>
+
+            </div>
+                
+                <button 
+                type="submit" 
+                class="btn btn-primary mt-2 col-md-3" 
+                [disabled]="formContato.invalid"
+                >Enviar</button>
             </form>
         </div>
         <div class="col-md-6">
